@@ -9,6 +9,9 @@ QuestionProject::Application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resources :questions
+      resources :answers
+
+      match '/specific_answer/:question_id', to: 'answers#answer_on_specific_question', via: 'get'
     end
 
   end
