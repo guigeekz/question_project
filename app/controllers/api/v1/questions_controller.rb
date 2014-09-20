@@ -13,11 +13,19 @@ module Api
       end
 
       def create
-        respond_with Question.create(params[:product])
+        @question = Question.new(params[:question])
+
+        @question.user = current_user
+
+        if @question.save
+          respond_with @question, notice: 'Question was successfully created.'
+        else
+          render action: "new"
+        end
       end
 
       def update
-        respond_with Question.update(params[:id], params[:product])
+        respond_with Question.update(params[:id], params[:question])
       end
 
       def destroy
