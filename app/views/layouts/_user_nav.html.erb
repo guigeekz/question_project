@@ -1,0 +1,7 @@
+<% unless signed_in? %>
+  <%= link_to "Nouveau compte", new_user_registration_path %>
+  <%= link_to "Connexion", new_user_session_path %>
+<% else %>
+  <%= current_user.email %>
+  <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete %>
+<% end %>

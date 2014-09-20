@@ -1,0 +1,15 @@
+<h1>Q&A</h1>
+
+<div id="questions"></div>
+
+
+<% if signed_in? %>
+<form id="new_question">
+  <input type="text", name="question[subject]" id="question_name">
+  <input type="submit" value="Ajouter">
+</form>
+
+  <%= 
+  #link_to 'New Question', new_question_path 
+  %>
+<% end %>
