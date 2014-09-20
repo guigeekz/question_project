@@ -1,21 +1,61 @@
 $(function () {
 
   function addQuestion(question) {
-    var question_div = '#question_' + question.id;
+    var question_div = '#q' + question.id;
 
-    // $('#questions').append('<div id=question_' + question.id + '><a href=/questions/' + question.id + '>' + question.subject + '</div>');
-    $('#questions').append('<div class=question_tab id=question_' + question.id + '>' + question.subject + '</div>');
-    // $('#questions').append('<div class=question_tab id=question_1>' + question.subject + '</div>');
-    // $(question_div).append('<div id=answer_' + question.id +'></div>');
+    $('#questions').append('<div class=question_tab id=q' + question.id + '><b>' + question.subject + '</b></div>');
+
   }
 
   function addAnswers(question) {
-    $(question).append('<div id=answer_' + question.id +'></div>');
+
+    $(question).append('<ul class=answer_tab id=answer_' + question.id +'></ul>');
+
+    $(question).append('<form id="new_answer"></form>');
+
+    var question_id = question.id.slice(1, question.id.length);
+
+    $('#new_answer')
+      .append('<input type="text", name="answer[content]" id="answer_content">')
+      .append('<input type="hidden" name="answer[question_id]" value=' + question_id + '>')
+      .append('<input type="submit" value="Ajouter">');
   }
 
+  function removeAllAnswers() {
+    $('#new_answer').remove();
+    $('.answer_tab').remove();
+  }
+
+  function addSpecificAnswer(answer) {
+    question_id = '#answer_q' + answer.question_id;
+    $(question_id).append('<li>' + answer.content + '</li>');
+  }
+
+  function get_question_id(question_div_id) {
+    return question_div_id.slice(1, question_div_id.length);
+  }
+
+  $('#questions').on('submit', '#new_answer', function(e) {
+    console.log(this);
+    $.post('/api/v1/answers', $(this).serialize(), addSpecificAnswer);
+    this.reset();
+    e.preventDefault();
+  });
 
   $('#questions').on('click', '.question_tab', function (){
-    addAnswers(this);
+    answer_id = '#answer_' + this.id;
+    if (!$(answer_id).length) {
+      removeAllAnswers();
+      addAnswers(this);
+
+      var question_id = get_question_id(this.id);
+
+      // Add the specific answer
+      $.getJSON('/api/v1/specific_answer/' + question_id, function(answers) {
+        $.each(answers, function() { addSpecificAnswer(this) });
+      });
+    }
+
   });
 
   $('#new_question').submit(function(e) {
