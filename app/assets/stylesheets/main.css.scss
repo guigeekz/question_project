@@ -68,17 +68,22 @@ body {
     /*margin-left: 20px;*/
     padding: 10px;
     
-    background-color: rgba(75, 75, 75, 0.47);
-
+    /* GREEN */
+/*    background-color: rgba(99, 150, 28, 0.76);
     border: 5px solid rgba(237, 240, 237, 0.2);
+*/
+
+    background-color: rgba(255, 255, 255, 0.86);
+    border: 5px solid rgba(0, 14, 29, 0.15);
+    color: rgba(0, 0, 0, 0.62);
+
 
     border-radius: 2px;
-
     font-family: monospace;
 
     /*color: rgba(0, 0, 0, 0.62);*/
     /*color:rgba(255, 255, 255, 0.93);*/
-    color:white;
+    /*color:white;*/
 
     /*color: #000;*/
     text-align: center;
@@ -105,10 +110,15 @@ body {
         height: 100%;
       }
       &:hover {
-        /*border: 5px solid rgba(255, 255, 255, 0.86);*/
-        background-color: rgba(255, 255, 255, 0.86);
-        /*color:#66991d;*/
-        color: rgba(0, 0, 0, 0.62);
+
+        /* WHITE */
+/*        background-color: rgba(255, 255, 255, 0.86);*/
+        /*color: rgba(0, 0, 0, 0.62);*/
+
+        background-color: rgba(99, 150, 28, 0.76);
+        border: 5px solid rgba(99, 150, 28, 0);
+        color: white;
+
         font-size: 15px;
 
         &:before {
@@ -122,10 +132,10 @@ body {
     }
 
   .selected {
-    /*border: 5px solid rgba(255, 255, 255, 0.86);*/
-    background-color: rgba(255, 255, 255, 0.86);
-    /*color:#66991d;*/
-    color: rgba(0, 0, 0, 0.62);
+    background-color: rgba(99, 150, 28, 0.76);
+    border: 5px solid rgba(237, 240, 237, 0);
+    color: white;
+
     font-size: 15px;
   }
 
@@ -159,9 +169,9 @@ body {
   span {
     padding: 9px;
     margin-top: 8px;
-    background-color: rgba(255, 255, 255, 0.86);
-    border: 2px solid #63961C;
-    color: #63961C;
+    background-color: rgba(99, 150, 28, 0.89);
+    border: 2px solid rgba(237, 240, 237, 0.2);
+    color: white;
     border-radius: 3px;
   }
 }
@@ -255,9 +265,9 @@ form#new_answer {
   }
   &:hover {
     /*border: 1px solid rgba(237, 240, 237, 1);*/
-    border: 1px solid rgba(237, 240, 237, 1);
-    background-color: rgba(255, 255, 255, 0.86);
-    color:black;
+    background-color: rgba(99, 150, 28, 0.76);
+    /*border: 5px solid rgba(237, 240, 237, 0);*/
+    color:white;
     /*color: rgba(0, 0, 0, 0.62);*/
 
     &:before {

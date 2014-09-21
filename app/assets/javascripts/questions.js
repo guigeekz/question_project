@@ -15,6 +15,10 @@ $(function () {
   function addAnswers(question) {
     var answer_div = $('#answers');
 
+    answer_div.removeClass('bounceOutRight animated');
+
+    answer_div.addClass('bounceInRight animated');
+
     $(question).addClass('selected');
 
     answer_div.append('<p id="question_title"><span>' + $(question).text() + '</span></p>')
@@ -27,6 +31,9 @@ $(function () {
       .append('<input type="text", name="answer[content]" id="answer_content">')
       .append('<input type="hidden" name="answer[question_id]" value=' + question_id + '>')
       .append('<input type="submit" id="answer_submit" value="Commenter">');
+  
+
+    answer_div.appendTo("body");
   }
 
   function removeAllAnswers() {
@@ -45,8 +52,10 @@ $(function () {
     return question_div_id.slice(1, question_div_id.length);
   }
 
+  $('#container_logo').addClass('swing animated');
+  $('#questions').addClass('fadeInUpBig animated');
+
   $('#questions').on('submit', '#new_answer', function(e) {
-    console.log(this);
     $.post('/api/v1/answers', $(this).serialize(), addSpecificAnswer);
     this.reset();
     e.preventDefault();
@@ -56,6 +65,7 @@ $(function () {
     answer_id = '#answer_' + this.id;
     if (!$(answer_id).length) {
       removeAllAnswers();
+      
       addAnswers(this);
 
       var question_id = get_question_id(this.id);
@@ -63,7 +73,7 @@ $(function () {
       // Add the specific answer
       $.getJSON('/api/v1/specific_answer/' + question_id, function(answers) {
         $.each(answers, function() { addSpecificAnswer(this) });
-      });
+      }); 
     }
 
   });
