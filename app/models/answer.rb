@@ -8,4 +8,8 @@ class Answer < ActiveRecord::Base
   validates :question_id, numericality: true, presence: true
   validates :user_id, numericality: true, presence: true
 
+  def write_at
+    self.created_at.strftime("%H:%M le %d/%m/%Y")
+  end
+
 end
