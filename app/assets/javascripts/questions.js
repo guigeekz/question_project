@@ -13,15 +13,16 @@ $(function () {
   }
 
   function addAnswers(question) {
+    removeAllAnswers();
+
     var answer_div = $('#answers');
 
-    answer_div.removeClass('bounceOutRight animated');
-
+    answer_div.removeClass('bounceOutRight animated')
     answer_div.addClass('bounceInRight animated');
 
     $(question).addClass('selected');
 
-    answer_div.append('<p id="question_title"><span>' + $(question).text() + '</span></p>')
+    answer_div.append('<div id="question_title"><span>' + $(question).text() + '</span></div>')
     answer_div.append('<ul class=answer_tab id=answer_' + question.id +'></ul>');
     answer_div.append('<form id="new_answer"></form>');
 
@@ -54,26 +55,45 @@ $(function () {
 
   $('#container_logo').addClass('swing animated');
   $('#questions').addClass('fadeInUpBig animated');
+  $('#new_question_tab').addClass('bounceInRight animated');
 
-  $('#questions').on('submit', '#new_answer', function(e) {
+  $('#answers').on('submit', '#new_answer', function(e) {
     $.post('/api/v1/answers', $(this).serialize(), addSpecificAnswer);
     this.reset();
     e.preventDefault();
   });
 
   $('#questions').on('click', '.question_tab', function (){
-    answer_id = '#answer_' + this.id;
-    if (!$(answer_id).length) {
-      removeAllAnswers();
-      
+    answer_id = $('#answer_' + this.id);
+    answer_div = $('#answers');
+    // if (!$(answer_id).length) {
+    if (!answer_id.length || answer_div.hasClass('bounceOutRight')) {
+
+      $('#new_question_tab').addClass('bounceOutRight animated');
+      // $('#new_question_tab').height(0);
+      $('#new_question_tab').hide();
+
       addAnswers(this);
 
       var question_id = get_question_id(this.id);
 
       // Add the specific answer
       $.getJSON('/api/v1/specific_answer/' + question_id, function(answers) {
-        $.each(answers, function() { addSpecificAnswer(this) });
+        console.log(answers);
+        $.each(answers, function() { console.log(this); addSpecificAnswer(this) });
       }); 
+    }
+    else {
+      $('#answers').removeClass('bounceInRight animated');
+      $('#answers').addClass('bounceOutRight animated');
+
+      $('.question_tab').removeClass('selected');
+
+      $('#new_question_tab').removeClass('bounceOutRight animated');
+      $('#new_question_tab').addClass('bounceInRight animated');
+      $('#new_question_tab').show();
+
+      // removeAllAnswers();
     }
 
   });

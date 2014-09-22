@@ -11,13 +11,16 @@ body {
 
 
   /*background-color: rgba(51, 51, 51, 1);*/
-  background-color: rgba(0, 14, 29, 0.82);
+  
+
+  /*background-color: rgba(0, 14, 29, 0.82);*/
+  background-color: rgba(0, 14, 29, 0.69);
 }
 
 .container {
   /*background: rgba(255, 255, 255, 0.42); */
   background: rgba(255, 255, 255, 0.86);
-  border-radius: 2px;
+  /*border-radius: 2px;*/
 }
 
 #header {
@@ -44,6 +47,12 @@ body {
 #connexion_tab {
   float:right;
   width: 43%;
+  p {
+  float: left;
+  color: white;
+  text-transform: uppercase;
+  margin-top: 23px;    
+  }
 }
 
 /***************
@@ -78,7 +87,7 @@ body {
     color: rgba(0, 0, 0, 0.62);
 
 
-    border-radius: 2px;
+    /*border-radius: 2px;*/
     font-family: monospace;
 
     /*color: rgba(0, 0, 0, 0.62);*/
@@ -146,6 +155,58 @@ body {
   }
 }
 
+/********************
+* new question form *
+********************/
+#new_question_tab {
+  width: 67%;
+  margin-right: 4%;
+  /*height: 400px;*/
+  float:right;
+  color:rgba(0, 0, 0, 0.62);
+  margin-bottom: 20px;
+  input[type="text"] {
+    width: 72%;
+    padding: 6px;
+    margin: 23px;
+    font-size:15px;
+  }
+}
+
+#question_form_title {
+  font-size:17px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: monospace;
+  color: white;
+  background-color: rgba(81, 121, 25, 0.89);
+  padding: 13px 0px 13px;
+  width: 100%;
+  margin-bottom: 15px;
+  span {
+    padding: 9px;
+    margin-top: 8px;
+    color: white;
+  } 
+}
+
+#question_submit {
+  border: 1px solid white;
+  padding: 10px;
+  color: white;
+  background: #79AA35;
+  width: 148px;
+  font-size: 13px;
+  &:hover {
+    cursor:pointer;
+    box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    -moz-box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    -webkit-box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    -o-box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+  }
+}
+
+
 /***************
 * Answer css *
 ****************/
@@ -164,15 +225,15 @@ body {
   text-align: center;
   text-transform: uppercase;
   font-family: monospace;
-  color:#63961C;
+  color: white;
   margin-bottom:55px;
+  background-color: rgba(81, 121, 25, 0.89);
+  padding: 13px 0px 13px;
+  width: 100%;
   span {
     padding: 9px;
     margin-top: 8px;
-    background-color: rgba(99, 150, 28, 0.89);
-    border: 2px solid rgba(237, 240, 237, 0.2);
     color: white;
-    border-radius: 3px;
   }
 }
 
@@ -181,6 +242,7 @@ body {
   margin-bottom: 12px;
   font-size: 14px;
   font-weight: bold;
+  line-height: 40px;
   span {
     font-weight: none;
     font-size: 11px;
@@ -189,13 +251,19 @@ body {
 }
 
 #answer_submit {
-  /*background-color: rgb(75, 75, 75);*/
   border: 1px solid white;
   padding: 10px;
   color: white;
   background: #79AA35;
-  border-radius: 1px;
   width: 135px;
+  font-size: 13px;
+  &:hover {
+    cursor:pointer;
+    box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    -moz-box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    -webkit-box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    -o-box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+  }
 }
 
 form#new_answer {
@@ -206,6 +274,7 @@ form#new_answer {
     height: 27px;
     margin: 22px;
     border-radius:2px;
+    font-size: 15px;
   }
 
   input[type="submit"] {
@@ -228,13 +297,11 @@ form#new_answer {
   /*background-color: rgba(75, 75, 75, 0.47);*/
   background-color: rgba(255, 255, 255, 0.86);
 
-  border: 1px solid rgba(237, 240, 237, 0.2);
+  border: 5px solid rgba(0, 14, 29, 0.15);
 
-  border-radius: 2px;
 
   font-family: monospace;
 
-  /*color:white;*/
   color: rgba(0, 0, 0, 0.62);
 
   margin: 15px;

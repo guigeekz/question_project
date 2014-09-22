@@ -11,8 +11,8 @@
       <%= link_to "Nouveau compte", new_user_registration_path, { class: 'btn btn_paper_raise'} %>
       <%= link_to "Connexion", new_user_session_path, { class: 'btn btn_paper_raise'} %>
     <% else %>
-      <%= current_user.email %>
-      <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete %>
+      <p><%= current_user.email %></p>
+      <%= link_to('Déconnexion', destroy_user_session_path, {class: 'btn btn_paper_raise', method: :delete}) %>
     <% end %>
   </div>
 </div>

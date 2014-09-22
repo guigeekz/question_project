@@ -11,7 +11,7 @@ QuestionProject::Application.routes.draw do
       resources :questions
       resources :answers
 
-      match '/specific_answer/:question_id', to: 'answers#answer_on_specific_question', via: 'get'
+      match '/specific_answer/:question_id', to: 'answers#answer_on_specific_question', via: 'get', as: 'specific_answer'
     end
 
   end

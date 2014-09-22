@@ -18,7 +18,7 @@ module Api
         @answer.user = current_user
 
         if @answer.save
-          respond_with @answer.question, notice: 'Answer was successfully created.'
+          render json: @answer
         else
           render action: "new"
         end

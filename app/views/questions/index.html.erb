@@ -1,15 +1,16 @@
 <div id="questions"></div>
-<!-- <div class="container fadeInRight animated" id="answers" disabled></div> -->
-<div class="container" id="answers"></div>
-
 
 <% if signed_in? %>
-<form id="new_question">
-  <input type="text", name="question[subject]" id="question_name">
-  <input type="submit" value="Ajouter">
-</form>
-
-  <%= 
-  #link_to 'New Question', new_question_path 
-  %>
+<div class="container" id='new_question_tab'>
+  <div id="question_form_title">
+    <span>Nouvelle question</span>
+  </div>
+  <form id="new_question">
+    <input type="text", name="question[subject]" id="question_name">
+    <input type="submit" id='question_submit' value="Poster">
+  </form>
+</div>
 <% end %>
+
+<div class="container" id="answers"></div>
+
