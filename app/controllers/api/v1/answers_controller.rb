@@ -35,7 +35,6 @@ module Api
       end
 
       def answer_on_specific_question
-        # respond_with Answer.where("question_id = ?", params[:question_id])
         @answers = Answer.where("question_id = ?", params[:question_id])
       end 
     end

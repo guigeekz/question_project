@@ -1,5 +1,8 @@
 $(function () {
 
+  /*******************************
+  * add specific question in DOM *
+  *******************************/
   function addQuestion(question) {
     var question_div = $('#questions');
 
@@ -12,6 +15,9 @@ $(function () {
 
   }
 
+  /*****************************
+  * add specific answer in DOM *
+  *****************************/
   function addAnswers(question) {
     removeAllAnswers();
 
@@ -23,7 +29,6 @@ $(function () {
     $(question).addClass('selected');
 
     answer_div.append('<div id="question_title"><span id="question_subject">' + $(question).text() + '</span></div>')
-    // answer_div.append('<div id="question_date"></div>');
     answer_div.append('<div id="answer_tab"><ul class=answer_tab id=answer_' + question.id +'></ul></div>');
     answer_div.append('<form id="new_answer"></form>');
 
@@ -56,14 +61,9 @@ $(function () {
     answer_div.appendTo("body");
   }
 
-  function searchQuestionTab(questions) {
-    for(var question_id in questions) {
-      console.log("question_id : " + questions[question_id].id);
-      question_id = '#q' + questions[question_id].id;
-      $(question_id).remove();
-    }
-  }
-
+  /********************************
+  * swap input question into span *
+  ********************************/
   function swapInputQuestion(question) {
     question_input = '#input_question_' + question.id
     question_id = 'question_subject';
@@ -71,6 +71,10 @@ $(function () {
     $(question_input).replaceWith('<span class="zoomIn animated question_content" id=' + question_id + '>' + question.subject + '</span>');
   }
 
+
+  /********************************
+  * swap input answer into span *
+  ********************************/
   function swapInputAnswer(answer) {
     answer_input = '#input_answer_' + answer.id
     answer_date_id = '#answer_date_' + answer.id;
@@ -81,6 +85,10 @@ $(function () {
     $(answer_date_id).addClass('zoomIn animated');
   }
 
+
+  /********************
+  * remove answer_tab *
+  ********************/
   function removeAllAnswers() {
     $('#new_answer').remove();
     $('#question_title').remove();
@@ -89,6 +97,9 @@ $(function () {
     $('.question_tab').removeClass('selected');
   }
 
+  /********************
+  * add answer in DOM *
+  ********************/
   function addSpecificAnswer(answer) {
     question_id = '#answer_q' + answer.question_id;
     answer_id = 'answer_' + answer.id;
@@ -103,6 +114,9 @@ $(function () {
     $(question_id).append(line);
   }
 
+  /**************************
+  * add a new answer in DOM *
+  **************************/
   function postNewAnswer(answer) {
     question_id = '#answer_q' + answer.question_id;
     answer_id = 'answer_' + answer.id;
@@ -115,6 +129,9 @@ $(function () {
     $(question_id).append(line);
   }
 
+  /****************************
+  * show the new question tab *
+  ****************************/
   function swapToNewQuestion() {
     answer_block = $('#answers');
     new_question_block = $('#new_question_tab');
@@ -129,6 +146,9 @@ $(function () {
     new_question_block.show();
   }
 
+  /**********************
+  * Get the question id *
+  **********************/
   function get_question_id(question_div_id) {
     return question_div_id.slice(1, question_div_id.length);
   }
@@ -145,15 +165,12 @@ $(function () {
   /**********************
   * click on a question *
   **********************/
-
   $('#questions').on('click', '.question_tab', function (){
     answer_id = $('#answer_' + this.id);
     answer_div = $('#answers');
-    // if (!$(answer_id).length) {
     if (!answer_id.length || answer_div.hasClass('bounceOutRight')) {
 
       $('#new_question_tab').addClass('bounceOutRight animated');
-      // $('#new_question_tab').height(0);
       $('#new_question_tab').hide();
 
       var question_id = get_question_id(this.id);
@@ -173,7 +190,6 @@ $(function () {
 
       // Add the specific answer
       $.getJSON('/api/v1/specific_answer/' + question_id, function(answers) {
-        // console.log(answers);
         $.each(answers, function() { addSpecificAnswer(this) });
       }); 
     }
@@ -311,7 +327,6 @@ $(function () {
   /***************
   * New question *
   ***************/
-
   $('#new_question').submit(function(e) {
     $.post('/api/v1/questions', $(this).serialize(), addQuestion);
     this.reset();
@@ -323,7 +338,6 @@ $(function () {
   /********************
   * Get all questions *
   ********************/
-
   $.ajax({
     type: 'GET',
     dataType: 'json',

@@ -10,7 +10,6 @@ module Api
 
       def show
         @question = Question.find(params[:id])
-        # respond_with Question.find(params[:id])
       end
 
       def create
@@ -45,9 +44,6 @@ module Api
       def search_question
         unless params[:question][:search].nil?
           @questions = Question.where("subject NOT LIKE ?", "%#{params[:question][:search]}%")
-          @questions.each do |question|
-            Rails.logger.debug "questions : #{question.subject}"
-          end
           @questions
         else
           nil
