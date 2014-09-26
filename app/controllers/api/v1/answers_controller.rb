@@ -18,14 +18,16 @@ module Api
         @answer.user = current_user
 
         if @answer.save
-          render json: @answer
+          @answer
         else
           render action: "new"
         end
       end
 
       def update
-        respond_with Answer.update(params[:id], params[:Answer])
+        @answer = Answer.find(params[:id])
+        @answer.update_attributes(params[:answer])
+        @answer
       end
 
       def destroy
@@ -33,7 +35,8 @@ module Api
       end
 
       def answer_on_specific_question
-        respond_with Answer.where("question_id = ?", params[:question_id])
+        # respond_with Answer.where("question_id = ?", params[:question_id])
+        @answers = Answer.where("question_id = ?", params[:question_id])
       end 
     end
   end

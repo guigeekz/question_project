@@ -5,11 +5,12 @@ module Api
       respond_to :json
 
       def index
-        respond_with Question.all
+        @questions = Question.all
       end
 
       def show
-        respond_with Question.find(params[:id])
+        @question = Question.find(params[:id])
+        # respond_with Question.find(params[:id])
       end
 
       def create
@@ -18,18 +19,39 @@ module Api
         @question.user = current_user
 
         if @question.save
-          respond_with @question, notice: 'Question was successfully created.'
+          @question
         else
           render action: "new"
         end
       end
 
       def update
-        respond_with Question.update(params[:id], params[:question])
+        @question = Question.find(params[:id])
+        @question.update_attributes(params[:question])
+        @question
       end
 
       def destroy
         respond_with Question.destroy(params[:id])
+      end
+
+      def new_view
+        @question = Question.find(params[:id])
+        @question.views += 1
+        @question.save
+        @question
+      end
+
+      def search_question
+        unless params[:question][:search].nil?
+          @questions = Question.where("subject NOT LIKE ?", "%#{params[:question][:search]}%")
+          @questions.each do |question|
+            Rails.logger.debug "questions : #{question.subject}"
+          end
+          @questions
+        else
+          nil
+        end
       end
     end
   end

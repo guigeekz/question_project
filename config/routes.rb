@@ -11,6 +11,8 @@ QuestionProject::Application.routes.draw do
       resources :questions
       resources :answers
 
+      match '/new_view/:id',                 to: 'questions#new_view', via: 'get', as: 'new_view'
+      match '/search_question/',             to: 'questions#search_question', via: 'post', as: 'search_question'
       match '/specific_answer/:question_id', to: 'answers#answer_on_specific_question', via: 'get', as: 'specific_answer'
     end
 
